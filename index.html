@@ -177,10 +177,10 @@
     </section>
   </main>
 
-  <nav class="bottom-nav" aria-label="Bottom navigation">
-    <button class="nav-btn active" data-target="learn">Learn</button>
-    <button class="nav-btn" data-target="engage">Engage</button>
-    <button class="nav-btn" data-target="more">More</button>
+  <nav class="bottom-nav" aria-label="Main navigation">
+    <button class="nav-btn active" data-target="learn" aria-pressed="true">Learn</button>
+    <button class="nav-btn" data-target="engage" aria-pressed="false">Engage</button>
+    <button class="nav-btn" data-target="more" aria-pressed="false">More</button>
   </nav>
 
   <script>
@@ -189,7 +189,11 @@
 
     function activatePage(targetId) {
       pages.forEach((page) => page.classList.toggle('active', page.id === targetId));
-      buttons.forEach((button) => button.classList.toggle('active', button.dataset.target === targetId));
+      buttons.forEach((button) => {
+        const isActive = button.dataset.target === targetId;
+        button.classList.toggle('active', isActive);
+        button.setAttribute('aria-pressed', String(isActive));
+      });
     }
 
     buttons.forEach((button) => {
