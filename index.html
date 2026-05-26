@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ICT Club</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: #121a33;
+      --text: #ebefff;
+      --muted: #b2b9d6;
+      --accent: #69a5ff;
+      --accent-soft: #223b72;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(160deg, #080d1a, #131f3f);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 1rem 1rem 6.25rem;
+    }
+
+    h1, h2, h3 { margin: 0 0 0.5rem; }
+    p { margin: 0; color: var(--muted); line-height: 1.5; }
+
+    .header {
+      background: rgba(18, 26, 51, 0.75);
+      border: 1px solid #2c3e6c;
+      border-radius: 14px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .page { display: none; }
+    .page.active { display: block; }
+
+    .grid {
+      display: grid;
+      gap: 0.75rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid #2b3e70;
+      border-radius: 12px;
+      padding: 0.9rem;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      background: var(--accent-soft);
+      color: #cde0ff;
+      border-radius: 999px;
+      padding: 0.2rem 0.55rem;
+      margin-top: 0.55rem;
+    }
+
+    .list {
+      margin: 0;
+      padding-left: 1rem;
+      color: var(--muted);
+    }
+
+    .list li { margin-bottom: 0.35rem; }
+
+    .bottom-nav {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+      padding: 0.65rem;
+      background: rgba(7, 10, 19, 0.97);
+      border-top: 1px solid #2b3e70;
+      backdrop-filter: blur(4px);
+    }
+
+    .nav-btn {
+      border: 1px solid #31508f;
+      background: #172548;
+      color: #dce6ff;
+      border-radius: 10px;
+      font-weight: 700;
+      padding: 0.8rem 0.4rem;
+      cursor: pointer;
+    }
+
+    .nav-btn.active {
+      background: #2c4f95;
+      border-color: #77abff;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1>ICT Club</h1>
+    <p>Learn practical and theoretical ICT skills, engage with the community, and access more utilities in one place.</p>
+  </header>
+
+  <main>
+    <section id="learn" class="page active" aria-labelledby="learn-title">
+      <h2 id="learn-title">Learn</h2>
+      <p>Courses are organized by skill sets: introductions (beginner), intermediates (intermediate level), and advanced (professional).</p>
+      <div class="grid" style="margin-top: 0.9rem;">
+        <article class="card">
+          <h3>Foundations of ICT</h3>
+          <p>Core ICT concepts, digital literacy, and theoretical grounding.</p>
+          <span class="tag">Introduction • Beginner</span>
+        </article>
+        <article class="card">
+          <h3>Introduction to HTML</h3>
+          <p>Build and structure web content with modern HTML fundamentals.</p>
+          <span class="tag">Introduction • Beginner</span>
+        </article>
+        <article class="card">
+          <h3>Intermediate Digital Electronics</h3>
+          <p>Understand digital circuits, logic gates, and practical electronics skills.</p>
+          <span class="tag">Intermediate Level</span>
+        </article>
+        <article class="card">
+          <h3>Computer Hardware</h3>
+          <p>Hardware components, setup, maintenance, and troubleshooting workflows.</p>
+          <span class="tag">Advanced • Professional</span>
+        </article>
+      </div>
+    </section>
+
+    <section id="engage" class="page" aria-labelledby="engage-title">
+      <h2 id="engage-title">Engage</h2>
+      <p>A mini social space for tech enthusiasts to connect and stay informed.</p>
+      <div class="grid" style="margin-top: 0.9rem;">
+        <article class="card">
+          <h3>Chat Rooms</h3>
+          <ul class="list">
+            <li>#hardware-lab</li>
+            <li>#software-builders</li>
+            <li>#ict-theory</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Discussions & Updates</h3>
+          <ul class="list">
+            <li>Threaded discussions by topic</li>
+            <li>Community updates feed</li>
+            <li>Weekly challenge highlights</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Notifications</h3>
+          <ul class="list">
+            <li>Mentions and replies</li>
+            <li>Course and room announcements</li>
+            <li>Event reminders</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="more" class="page" aria-labelledby="more-title">
+      <h2 id="more-title">More</h2>
+      <p>Additional utilities and support features for the platform.</p>
+      <div class="grid" style="margin-top: 0.9rem;">
+        <article class="card"><h3>General Settings</h3><p>Profile, theme, privacy, and account preferences.</p></article>
+        <article class="card"><h3>More Offers</h3><p>Scholarships, partner opportunities, and premium workshops.</p></article>
+        <article class="card"><h3>About ICT Club</h3><p>Mission, team, and platform direction for the tech community.</p></article>
+      </div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav" aria-label="Main navigation">
+    <button class="nav-btn active" data-target="learn" aria-pressed="true">Learn</button>
+    <button class="nav-btn" data-target="engage" aria-pressed="false">Engage</button>
+    <button class="nav-btn" data-target="more" aria-pressed="false">More</button>
+  </nav>
+
+  <script>
+    const pages = document.querySelectorAll('.page');
+    const buttons = document.querySelectorAll('.nav-btn');
+
+    function activatePage(targetId) {
+      pages.forEach((page) => page.classList.toggle('active', page.id === targetId));
+      buttons.forEach((button) => {
+        const isActive = button.dataset.target === targetId;
+        button.classList.toggle('active', isActive);
+        button.setAttribute('aria-pressed', String(isActive));
+      });
+    }
+
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => activatePage(button.dataset.target));
+    });
+  </script>
+</body>
+</html>
