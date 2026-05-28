@@ -3,7 +3,8 @@ A repo for a social application where information and communications technologie
 
 ## Current prototype
 Open `index.html` in a browser to view:
+- Engage page as the default home with a For You feed
+- Top-right account panel with system-created profile, editable fields, and Google login/sign-up options
 - Learn page (ICT courses by skill level)
-- Engage page (chat/discussion/update/notification sections)
 - More page (settings, offers, about)
 - Fixed bottom navigation between Learn, Engage, and More
