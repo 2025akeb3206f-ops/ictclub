@@ -194,7 +194,7 @@
       <button id="account-toggle" class="account-btn" aria-expanded="false">Account</button>
       <section id="account-panel" class="account-panel" aria-label="Account settings">
         <div class="account-meta">
-          <h3 id="account-name-display">Member</h3>
+          <h3 id="account-name-display">Loading profile...</h3>
           <p id="account-status">System-created account</p>
         </div>
         <label class="account-label" for="account-name-input">Display name</label>
@@ -311,9 +311,11 @@
     const saveAccountButton = document.getElementById('save-account');
     const googleLoginButton = document.getElementById('google-login');
     const googleSignupButton = document.getElementById('google-signup');
+    const MIN_MEMBER_ID = 1000;
+    const MEMBER_ID_RANGE = 9000;
 
     function createDefaultProfile() {
-      const randomId = Math.floor(1000 + Math.random() * 9000);
+      const randomId = Math.floor(MIN_MEMBER_ID + Math.random() * MEMBER_ID_RANGE);
       return {
         name: `Member ${randomId}`,
         bio: '',
@@ -365,7 +367,12 @@
     });
 
     saveAccountButton.addEventListener('click', () => {
-      profile.name = accountNameInput.value.trim() || profile.name;
+      const nextName = accountNameInput.value.trim();
+      if (!nextName) {
+        alert('Display name cannot be empty.');
+        return;
+      }
+      profile.name = nextName;
       profile.bio = accountBioInput.value.trim();
       saveProfile(profile);
       renderProfile();
