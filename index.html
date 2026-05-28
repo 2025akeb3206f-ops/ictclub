@@ -34,6 +34,88 @@
       border-radius: 14px;
       padding: 1rem;
       margin-bottom: 1rem;
+      position: relative;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      align-items: flex-start;
+    }
+
+    .account-area {
+      position: relative;
+    }
+
+    .account-btn {
+      border: 1px solid #31508f;
+      background: #172548;
+      color: #dce6ff;
+      border-radius: 10px;
+      font-weight: 700;
+      padding: 0.55rem 0.8rem;
+      cursor: pointer;
+    }
+
+    .account-panel {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 0.5rem);
+      width: min(88vw, 320px);
+      background: #101831;
+      border: 1px solid #32508d;
+      border-radius: 12px;
+      padding: 0.85rem;
+      display: none;
+      z-index: 2;
+    }
+
+    .account-panel.open {
+      display: block;
+    }
+
+    .account-meta {
+      margin-bottom: 0.75rem;
+    }
+
+    .account-label {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 0.2rem;
+    }
+
+    .account-input {
+      width: 100%;
+      border: 1px solid #345390;
+      border-radius: 8px;
+      background: #0b1227;
+      color: var(--text);
+      padding: 0.5rem 0.6rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .account-actions {
+      display: grid;
+      gap: 0.5rem;
+    }
+
+    .action-btn {
+      border: 1px solid #3a5ea6;
+      background: #1c2f5f;
+      color: #e8efff;
+      border-radius: 8px;
+      padding: 0.55rem 0.6rem;
+      cursor: pointer;
+      font-weight: 700;
+      text-align: left;
+    }
+
+    .feed-item + .feed-item {
+      margin-top: 0.75rem;
+      border-top: 1px solid #2b3e70;
+      padding-top: 0.75rem;
     }
 
     .page { display: none; }
@@ -103,12 +185,35 @@
 </head>
 <body>
   <header class="header">
-    <h1>ICT Club</h1>
-    <p>Learn practical and theoretical ICT skills, engage with the community, and access more utilities in one place.</p>
-  </header>
+  <div class="header-top">
+    <div>
+      <h1>ICT Club</h1>
+      <p>Learn practical and theoretical ICT skills, engage with the community, and access more utilities in one place.</p>
+    </div>
+    <div class="account-area">
+      <button id="account-toggle" class="account-btn" aria-expanded="false">Account</button>
+      <section id="account-panel" class="account-panel" aria-label="Account settings">
+        <div class="account-meta">
+          <h3 id="account-name-display">Member profile</h3>
+          <p id="account-status">System-created account</p>
+        </div>
+        <label class="account-label" for="account-name-input">Display name</label>
+        <input id="account-name-input" class="account-input" type="text" />
+        <label class="account-label" for="account-bio-input">Bio</label>
+        <input id="account-bio-input" class="account-input" type="text" placeholder="Tell the community about your interests" />
+        <div class="account-actions">
+          <button id="save-account" class="action-btn">Save profile changes</button>
+          <button id="google-login" class="action-btn">Login with Google</button>
+          <button id="google-signup" class="action-btn">Sign up with Google</button>
+        </div>
+        <p id="account-feedback" aria-live="polite" style="margin-top:0.7rem;"></p>
+      </section>
+    </div>
+  </div>
+</header>
 
-  <main>
-    <section id="learn" class="page active" aria-labelledby="learn-title">
+<main>
+  <section id="learn" class="page" aria-labelledby="learn-title">
       <h2 id="learn-title">Learn</h2>
       <p>Courses are organized by skill sets: introductions (beginner), intermediates (intermediate level), and advanced (professional).</p>
       <div class="grid" style="margin-top: 0.9rem;">
@@ -155,10 +260,22 @@
       </div>
     </section>
 
-    <section id="engage" class="page" aria-labelledby="engage-title">
+    <section id="engage" class="page active" aria-labelledby="engage-title">
       <h2 id="engage-title">Engage</h2>
-      <p>A mini social space for tech enthusiasts to connect and stay informed.</p>
+      <p>Your home community space with a personalized For You feed.</p>
       <div class="grid" style="margin-top: 0.9rem;">
+        <article class="card">
+          <h3>For You Feed</h3>
+          <div class="feed-item">
+            <p><strong>Weekly challenge:</strong> Build a basic portfolio page and share it in #software-builders.</p>
+          </div>
+          <div class="feed-item">
+            <p><strong>Recommended course:</strong> Intermediate Digital Electronics is trending for your interests.</p>
+          </div>
+          <div class="feed-item">
+            <p><strong>Upcoming event:</strong> Saturday hardware clinic starts at 10:00 AM.</p>
+          </div>
+        </article>
         <article class="card">
           <h3>Chat Rooms</h3>
           <ul class="list">
@@ -198,14 +315,67 @@
   </main>
 
   <nav class="bottom-nav" aria-label="Main navigation">
-    <button class="nav-btn active" data-target="learn" aria-pressed="true">Learn</button>
-    <button class="nav-btn" data-target="engage" aria-pressed="false">Engage</button>
+    <button class="nav-btn" data-target="learn" aria-pressed="false">Learn</button>
+    <button class="nav-btn active" data-target="engage" aria-pressed="true">Engage</button>
     <button class="nav-btn" data-target="more" aria-pressed="false">More</button>
   </nav>
 
   <script>
     const pages = document.querySelectorAll('.page');
     const buttons = document.querySelectorAll('.nav-btn');
+    const accountToggle = document.getElementById('account-toggle');
+    const accountPanel = document.getElementById('account-panel');
+    const accountNameDisplay = document.getElementById('account-name-display');
+    const accountStatus = document.getElementById('account-status');
+    const accountNameInput = document.getElementById('account-name-input');
+    const accountBioInput = document.getElementById('account-bio-input');
+    const saveAccountButton = document.getElementById('save-account');
+    const googleLoginButton = document.getElementById('google-login');
+    const googleSignupButton = document.getElementById('google-signup');
+    const accountFeedback = document.getElementById('account-feedback');
+    const MIN_MEMBER_ID = 1000;
+    const MEMBER_ID_RANGE = 9000;
+
+    function createDefaultProfile() {
+      const randomSource = window.crypto?.getRandomValues
+        ? window.crypto.getRandomValues(new Uint32Array(1))[0]
+        : Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
+      const randomId = MIN_MEMBER_ID + (randomSource % MEMBER_ID_RANGE);
+      return {
+        name: `Member ${randomId}`,
+        bio: '',
+        connected: false
+      };
+    }
+
+    function loadProfile() {
+      const saved = localStorage.getItem('ictclubProfile');
+      if (!saved) return createDefaultProfile();
+      try {
+        return JSON.parse(saved);
+      } catch {
+        return createDefaultProfile();
+      }
+    }
+
+    function saveProfile(profile) {
+      localStorage.setItem('ictclubProfile', JSON.stringify(profile));
+    }
+
+    let profile = loadProfile();
+
+    function renderProfile() {
+      accountNameDisplay.textContent = profile.name;
+      accountNameInput.value = profile.name;
+      accountBioInput.value = profile.bio;
+      accountStatus.textContent = profile.connected
+        ? 'Google connected • profile personalized'
+        : 'System-created account';
+    }
+
+    function setFeedback(message) {
+      accountFeedback.textContent = message;
+    }
 
     function activatePage(targetId) {
       pages.forEach((page) => page.classList.toggle('active', page.id === targetId));
@@ -219,6 +389,37 @@
     buttons.forEach((button) => {
       button.addEventListener('click', () => activatePage(button.dataset.target));
     });
+
+    accountToggle.addEventListener('click', () => {
+      const isOpen = accountPanel.classList.toggle('open');
+      accountToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    saveAccountButton.addEventListener('click', () => {
+      const nextName = accountNameInput.value.trim();
+      if (!nextName) {
+        setFeedback('Display name cannot be empty.');
+        return;
+      }
+      profile.name = nextName;
+      profile.bio = accountBioInput.value.trim();
+      saveProfile(profile);
+      renderProfile();
+      setFeedback('Profile updated.');
+    });
+
+    function connectGoogle(mode) {
+      profile.connected = true;
+      saveProfile(profile);
+      renderProfile();
+      setFeedback(`${mode} with Google selected. Complete OAuth in backend integration.`);
+    }
+
+    googleLoginButton.addEventListener('click', () => connectGoogle('Login'));
+    googleSignupButton.addEventListener('click', () => connectGoogle('Sign up'));
+
+    renderProfile();
+    activatePage('engage');
   </script>
 </body>
 </html>
