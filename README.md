@@ -1,10 +1,10 @@
 # ictclub
-A repo for a social application where information and communications technologies are learnt, discussed, disseminated and knowledge shared. for all tech enthusiasts and all there to support a dedicated tech community. Otherwise, welcome to the club.
+A repo for an ICT Club website focused on publishing tutorials, event updates, and project stories for the club community.
 
 ## Current prototype
-Open `index.html` in a browser to view:
-- Engage page as the default home with a For You feed
-- Top-right account panel with system-created profile, editable fields, and Google login/sign-up options
-- Learn page (ICT courses by skill level)
-- More page (settings, offers, about)
-- Fixed bottom navigation between Learn, Engage, and More
+Open `/home/runner/work/ictclub/ictclub/index.html` in a browser to view:
+- Blog-style homepage with featured ICT Club story
+- Latest posts grid for tutorials, events, and project spotlights
+- Category filters from top navigation and sidebar buttons
+- About section and newsletter subscription form
+- Responsive two-column layout that collapses on small screens

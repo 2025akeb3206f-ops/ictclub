@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ICT Club</title>
+  <title>ICT Club Blog</title>
   <style>
     :root {
-      --bg: #0b1020;
-      --card: #121a33;
-      --text: #ebefff;
-      --muted: #b2b9d6;
-      --accent: #69a5ff;
-      --accent-soft: #223b72;
+      --bg: #f4f7fc;
+      --surface: #ffffff;
+      --text: #15213b;
+      --muted: #5c6a87;
+      --border: #d9e0ef;
+      --accent: #244da8;
+      --accent-soft: #e7efff;
     }
 
     * { box-sizing: border-box; }
@@ -19,407 +20,338 @@
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
-      background: linear-gradient(160deg, #080d1a, #131f3f);
+      background: var(--bg);
       color: var(--text);
-      min-height: 100vh;
-      padding: 1rem 1rem 6.25rem;
+      line-height: 1.6;
     }
 
-    h1, h2, h3 { margin: 0 0 0.5rem; }
-    p { margin: 0; color: var(--muted); line-height: 1.5; }
+    a { color: inherit; text-decoration: none; }
 
-    .header {
-      background: rgba(18, 26, 51, 0.75);
-      border: 1px solid #2c3e6c;
-      border-radius: 14px;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      position: relative;
+    .wrapper {
+      width: min(1080px, 92%);
+      margin: 0 auto;
     }
 
-    .header-top {
+    .site-header {
+      background: #0f1f45;
+      color: #f0f5ff;
+      padding: 2.5rem 0 2rem;
+      border-bottom: 4px solid #2c56b0;
+    }
+
+    .site-header h1 {
+      margin: 0;
+      font-size: clamp(1.7rem, 4vw, 2.4rem);
+    }
+
+    .site-header p {
+      margin: 0.65rem 0 0;
+      color: #d0dbf3;
+      max-width: 44rem;
+    }
+
+    .header-row {
       display: flex;
       justify-content: space-between;
-      gap: 0.75rem;
-      align-items: flex-start;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
     }
 
-    .account-area {
-      position: relative;
+    .main-nav {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-top: 1.1rem;
     }
 
-    .account-btn {
-      border: 1px solid #31508f;
-      background: #172548;
-      color: #dce6ff;
-      border-radius: 10px;
-      font-weight: 700;
-      padding: 0.55rem 0.8rem;
-      cursor: pointer;
-    }
-
-    .account-panel {
-      position: absolute;
-      right: 0;
-      top: calc(100% + 0.5rem);
-      width: min(88vw, 320px);
-      background: #101831;
-      border: 1px solid #32508d;
-      border-radius: 12px;
-      padding: 0.85rem;
-      display: none;
-      z-index: 2;
-    }
-
-    .account-panel.open {
-      display: block;
-    }
-
-    .account-meta {
-      margin-bottom: 0.75rem;
-    }
-
-    .account-label {
-      display: block;
-      font-size: 0.78rem;
-      color: var(--muted);
-      margin-bottom: 0.2rem;
-    }
-
-    .account-input {
-      width: 100%;
-      border: 1px solid #345390;
-      border-radius: 8px;
-      background: #0b1227;
-      color: var(--text);
-      padding: 0.5rem 0.6rem;
-      margin-bottom: 0.6rem;
-    }
-
-    .account-actions {
-      display: grid;
-      gap: 0.5rem;
-    }
-
-    .action-btn {
-      border: 1px solid #3a5ea6;
-      background: #1c2f5f;
-      color: #e8efff;
-      border-radius: 8px;
-      padding: 0.55rem 0.6rem;
+    .main-nav button {
+      border: 1px solid #4a6fba;
+      background: #16306a;
+      color: #f2f6ff;
+      border-radius: 999px;
+      padding: 0.45rem 0.9rem;
       cursor: pointer;
       font-weight: 700;
-      text-align: left;
     }
 
-    .feed-item + .feed-item {
-      margin-top: 0.75rem;
-      border-top: 1px solid #2b3e70;
-      padding-top: 0.75rem;
+    .main-nav button.active {
+      background: #f2f6ff;
+      color: #16306a;
+      border-color: #f2f6ff;
     }
 
-    .page { display: none; }
-    .page.active { display: block; }
-
-    .grid {
+    .content {
+      padding: 1.4rem 0 2.3rem;
       display: grid;
-      gap: 0.75rem;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: 2fr 1fr;
+      gap: 1.2rem;
     }
 
     .card {
-      background: var(--card);
-      border: 1px solid #2b3e70;
+      background: var(--surface);
+      border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 0.9rem;
+      padding: 1rem;
     }
 
-    .tag {
+    .hero {
+      background: linear-gradient(125deg, #18387d, #2654b3);
+      color: #eff4ff;
+      border: none;
+      padding: 1.2rem;
+    }
+
+    .label {
       display: inline-block;
-      font-size: 0.75rem;
       background: var(--accent-soft);
-      color: #cde0ff;
+      color: var(--accent);
       border-radius: 999px;
-      padding: 0.2rem 0.55rem;
-      margin-top: 0.55rem;
-    }
-
-    .list {
-      margin: 0;
-      padding-left: 1rem;
-      color: var(--muted);
-    }
-
-    .list li { margin-bottom: 0.35rem; }
-
-    .bottom-nav {
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.5rem;
-      padding: 0.65rem;
-      background: rgba(7, 10, 19, 0.97);
-      border-top: 1px solid #2b3e70;
-      backdrop-filter: blur(4px);
-    }
-
-    .nav-btn {
-      border: 1px solid #31508f;
-      background: #172548;
-      color: #dce6ff;
-      border-radius: 10px;
+      padding: 0.15rem 0.55rem;
+      font-size: 0.75rem;
       font-weight: 700;
-      padding: 0.8rem 0.4rem;
+      margin-bottom: 0.55rem;
+    }
+
+    .hero .label {
+      background: rgba(237, 244, 255, 0.2);
+      color: #f4f8ff;
+    }
+
+    .post-grid {
+      display: grid;
+      gap: 0.8rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .post-card h3,
+    .hero h2,
+    .section-head {
+      margin: 0 0 0.5rem;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .sidebar {
+      display: grid;
+      gap: 0.8rem;
+      align-content: start;
+    }
+
+    .category-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .category-list button {
+      width: 100%;
+      text-align: left;
+      border: 1px solid var(--border);
+      background: #f9fbff;
+      border-radius: 8px;
+      padding: 0.5rem 0.65rem;
+      color: var(--text);
       cursor: pointer;
     }
 
-    .nav-btn.active {
-      background: #2c4f95;
-      border-color: #77abff;
+    .category-list button.active {
+      border-color: #4c73c9;
+      background: #edf3ff;
+      color: #163a89;
+      font-weight: 700;
+    }
+
+    .newsletter {
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    .newsletter input {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.55rem 0.65rem;
+      font: inherit;
+    }
+
+    .newsletter button {
+      border: 1px solid #1f4da8;
+      background: #1f4da8;
       color: #fff;
+      border-radius: 8px;
+      padding: 0.6rem;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .site-footer {
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.9rem;
+      padding: 1rem 0 2rem;
+      text-align: center;
+    }
+
+    @media (max-width: 860px) {
+      .content {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
-  <header class="header">
-  <div class="header-top">
-    <div>
-      <h1>ICT Club</h1>
-      <p>Learn practical and theoretical ICT skills, engage with the community, and access more utilities in one place.</p>
+  <header class="site-header">
+    <div class="wrapper">
+      <div class="header-row">
+        <div>
+          <h1>ICT Club Blog</h1>
+          <p>Stories, tutorials, and event highlights from our school ICT community.</p>
+        </div>
+      </div>
+      <nav class="main-nav" aria-label="Blog sections">
+        <button class="active" data-view="all">All Posts</button>
+        <button data-view="tutorial">Tutorials</button>
+        <button data-view="events">Events</button>
+        <button data-view="projects">Projects</button>
+      </nav>
     </div>
-    <div class="account-area">
-      <button id="account-toggle" class="account-btn" aria-expanded="false">Account</button>
-      <section id="account-panel" class="account-panel" aria-label="Account settings">
-        <div class="account-meta">
-          <h3 id="account-name-display">Member profile</h3>
-          <p id="account-status">System-created account</p>
+  </header>
+
+  <main class="wrapper content">
+    <section>
+      <article class="card hero" data-category="projects">
+        <span class="label">Featured Story</span>
+        <h2>How Our ICT Club Built a Smart Attendance Tracker</h2>
+        <p class="meta">By Club Editorial Team · September 2026</p>
+        <p>Members combined web development, sensors, and cloud basics to create an attendance tracker that improves meeting check-ins and gives us useful participation insights.</p>
+      </article>
+
+      <section class="card" style="margin-top: 0.85rem;">
+        <h2 class="section-head">Latest Posts</h2>
+        <div id="post-list" class="post-grid">
+          <article class="card post-card" data-category="tutorial">
+            <span class="label">Tutorial</span>
+            <h3>Beginner Guide to HTML for ICT Students</h3>
+            <p class="meta">September 28, 2026 · 5 min read</p>
+            <p>Start creating web pages with a practical walkthrough used in our weekly coding sessions.</p>
+          </article>
+          <article class="card post-card" data-category="events">
+            <span class="label">Event</span>
+            <h3>Recap: Saturday Hardware Clinic</h3>
+            <p class="meta">September 22, 2026 · 4 min read</p>
+            <p>See what members learned while assembling PCs, diagnosing faulty parts, and installing operating systems.</p>
+          </article>
+          <article class="card post-card" data-category="projects">
+            <span class="label">Project Spotlight</span>
+            <h3>Student Portfolio Showcase Winners</h3>
+            <p class="meta">September 17, 2026 · 3 min read</p>
+            <p>Highlights from this month’s portfolio challenge and tips from mentors on improving project presentation.</p>
+          </article>
+          <article class="card post-card" data-category="tutorial">
+            <span class="label">Tutorial</span>
+            <h3>Understanding Binary and Logic Gates</h3>
+            <p class="meta">September 10, 2026 · 6 min read</p>
+            <p>A simple explanation of digital electronics concepts every aspiring ICT learner should know.</p>
+          </article>
         </div>
-        <label class="account-label" for="account-name-input">Display name</label>
-        <input id="account-name-input" class="account-input" type="text" />
-        <label class="account-label" for="account-bio-input">Bio</label>
-        <input id="account-bio-input" class="account-input" type="text" placeholder="Tell the community about your interests" />
-        <div class="account-actions">
-          <button id="save-account" class="action-btn">Save profile changes</button>
-          <button id="google-login" class="action-btn">Login with Google</button>
-          <button id="google-signup" class="action-btn">Sign up with Google</button>
-        </div>
-        <p id="account-feedback" aria-live="polite" style="margin-top:0.7rem;"></p>
       </section>
-    </div>
-  </div>
-</header>
-
-<main>
-  <section id="learn" class="page" aria-labelledby="learn-title">
-      <h2 id="learn-title">Learn</h2>
-      <p>Courses are organized by skill sets: introductions (beginner), intermediates (intermediate level), and advanced (professional).</p>
-      <div class="grid" style="margin-top: 0.9rem;">
-        <article class="card">
-          <h3>Foundations of ICT</h3>
-          <p>Core ICT concepts, digital literacy, and theoretical grounding.</p>
-          <ul class="list">
-            <li>What is ICT and why it matters</li>
-            <li>Digital citizenship and online safety</li>
-            <li>Data, information, and communication systems</li>
-          </ul>
-          <span class="tag">Introduction • Beginner</span>
-        </article>
-        <article class="card">
-          <h3>Introduction to HTML</h3>
-          <p>Build and structure web content with modern HTML fundamentals.</p>
-          <ul class="list">
-            <li>HTML document structure and semantic tags</li>
-            <li>Creating links, lists, and media content</li>
-            <li>Building accessible forms and tables</li>
-          </ul>
-          <span class="tag">Introduction • Beginner</span>
-        </article>
-        <article class="card">
-          <h3>Intermediate Digital Electronics</h3>
-          <p>Understand digital circuits, logic gates, and practical electronics skills.</p>
-          <ul class="list">
-            <li>Number systems and binary operations</li>
-            <li>Logic gates and Boolean algebra applications</li>
-            <li>Sequential circuits and timing basics</li>
-          </ul>
-          <span class="tag">Intermediate Level</span>
-        </article>
-        <article class="card">
-          <h3>Computer Hardware</h3>
-          <p>Hardware components, setup, maintenance, and troubleshooting workflows.</p>
-          <ul class="list">
-            <li>PC components and motherboard architecture</li>
-            <li>Operating system installation and configuration</li>
-            <li>Preventive maintenance and fault diagnosis</li>
-          </ul>
-          <span class="tag">Advanced • Professional</span>
-        </article>
-      </div>
     </section>
 
-    <section id="engage" class="page active" aria-labelledby="engage-title">
-      <h2 id="engage-title">Engage</h2>
-      <p>Your home community space with a personalized For You feed.</p>
-      <div class="grid" style="margin-top: 0.9rem;">
-        <article class="card">
-          <h3>For You Feed</h3>
-          <div class="feed-item">
-            <p><strong>Weekly challenge:</strong> Build a basic portfolio page and share it in #software-builders.</p>
-          </div>
-          <div class="feed-item">
-            <p><strong>Recommended course:</strong> Intermediate Digital Electronics is trending for your interests.</p>
-          </div>
-          <div class="feed-item">
-            <p><strong>Upcoming event:</strong> Saturday hardware clinic starts at 10:00 AM.</p>
-          </div>
-        </article>
-        <article class="card">
-          <h3>Chat Rooms</h3>
-          <ul class="list">
-            <li>#hardware-lab</li>
-            <li>#software-builders</li>
-            <li>#ict-theory</li>
-          </ul>
-        </article>
-        <article class="card">
-          <h3>Discussions & Updates</h3>
-          <ul class="list">
-            <li>Threaded discussions by topic</li>
-            <li>Community updates feed</li>
-            <li>Weekly challenge highlights</li>
-          </ul>
-        </article>
-        <article class="card">
-          <h3>Notifications</h3>
-          <ul class="list">
-            <li>Mentions and replies</li>
-            <li>Course and room announcements</li>
-            <li>Event reminders</li>
-          </ul>
-        </article>
-      </div>
-    </section>
+    <aside class="sidebar">
+      <section class="card">
+        <h2 class="section-head">Categories</h2>
+        <ul class="category-list" id="category-filter">
+          <li><button class="active" data-filter="all">All</button></li>
+          <li><button data-filter="tutorial">Tutorials</button></li>
+          <li><button data-filter="events">Events</button></li>
+          <li><button data-filter="projects">Projects</button></li>
+        </ul>
+      </section>
 
-    <section id="more" class="page" aria-labelledby="more-title">
-      <h2 id="more-title">More</h2>
-      <p>Additional utilities and support features for the platform.</p>
-      <div class="grid" style="margin-top: 0.9rem;">
-        <article class="card"><h3>General Settings</h3><p>Profile, theme, privacy, and account preferences.</p></article>
-        <article class="card"><h3>More Offers</h3><p>Scholarships, partner opportunities, and premium workshops.</p></article>
-        <article class="card"><h3>About ICT Club</h3><p>Mission, team, and platform direction for the tech community.</p></article>
-      </div>
-    </section>
+      <section class="card">
+        <h2 class="section-head">About the Club</h2>
+        <p>We are a student-led ICT community focused on coding, hardware, digital literacy, and collaborative innovation.</p>
+      </section>
+
+      <section class="card">
+        <h2 class="section-head">Newsletter</h2>
+        <form class="newsletter" id="newsletter-form">
+          <label for="email">Get weekly posts and event updates.</label>
+          <input id="email" type="email" placeholder="you@example.com" required />
+          <button type="submit">Subscribe</button>
+          <p id="newsletter-message" class="meta" aria-live="polite"></p>
+        </form>
+      </section>
+    </aside>
   </main>
 
-  <nav class="bottom-nav" aria-label="Main navigation">
-    <button class="nav-btn" data-target="learn" aria-pressed="false">Learn</button>
-    <button class="nav-btn active" data-target="engage" aria-pressed="true">Engage</button>
-    <button class="nav-btn" data-target="more" aria-pressed="false">More</button>
-  </nav>
+  <footer class="wrapper site-footer">
+    © <span id="year"></span> ICT Club Blog · Built by students, for students.
+  </footer>
 
   <script>
-    const pages = document.querySelectorAll('.page');
-    const buttons = document.querySelectorAll('.nav-btn');
-    const accountToggle = document.getElementById('account-toggle');
-    const accountPanel = document.getElementById('account-panel');
-    const accountNameDisplay = document.getElementById('account-name-display');
-    const accountStatus = document.getElementById('account-status');
-    const accountNameInput = document.getElementById('account-name-input');
-    const accountBioInput = document.getElementById('account-bio-input');
-    const saveAccountButton = document.getElementById('save-account');
-    const googleLoginButton = document.getElementById('google-login');
-    const googleSignupButton = document.getElementById('google-signup');
-    const accountFeedback = document.getElementById('account-feedback');
-    const MIN_MEMBER_ID = 1000;
-    const MEMBER_ID_RANGE = 9000;
+    const navButtons = document.querySelectorAll('.main-nav button');
+    const filterButtons = document.querySelectorAll('#category-filter button');
+    const posts = document.querySelectorAll('#post-list .post-card');
+    const featuredPost = document.querySelector('.hero');
+    const newsletterForm = document.getElementById('newsletter-form');
+    const newsletterMessage = document.getElementById('newsletter-message');
 
-    function createDefaultProfile() {
-      const randomSource = window.crypto?.getRandomValues
-        ? window.crypto.getRandomValues(new Uint32Array(1))[0]
-        : Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
-      const randomId = MIN_MEMBER_ID + (randomSource % MEMBER_ID_RANGE);
-      return {
-        name: `Member ${randomId}`,
-        bio: '',
-        connected: false
-      };
-    }
-
-    function loadProfile() {
-      const saved = localStorage.getItem('ictclubProfile');
-      if (!saved) return createDefaultProfile();
-      try {
-        return JSON.parse(saved);
-      } catch {
-        return createDefaultProfile();
-      }
-    }
-
-    function saveProfile(profile) {
-      localStorage.setItem('ictclubProfile', JSON.stringify(profile));
-    }
-
-    let profile = loadProfile();
-
-    function renderProfile() {
-      accountNameDisplay.textContent = profile.name;
-      accountNameInput.value = profile.name;
-      accountBioInput.value = profile.bio;
-      accountStatus.textContent = profile.connected
-        ? 'Google connected • profile personalized'
-        : 'System-created account';
-    }
-
-    function setFeedback(message) {
-      accountFeedback.textContent = message;
-    }
-
-    function activatePage(targetId) {
-      pages.forEach((page) => page.classList.toggle('active', page.id === targetId));
-      buttons.forEach((button) => {
-        const isActive = button.dataset.target === targetId;
-        button.classList.toggle('active', isActive);
-        button.setAttribute('aria-pressed', String(isActive));
+    function setActive(elements, selected) {
+      elements.forEach((button) => {
+        button.classList.toggle('active', button === selected);
       });
     }
 
-    buttons.forEach((button) => {
-      button.addEventListener('click', () => activatePage(button.dataset.target));
-    });
+    function applyFilter(category) {
+      posts.forEach((post) => {
+        const show = category === 'all' || post.dataset.category === category;
+        post.classList.toggle('hidden', !show);
+      });
 
-    accountToggle.addEventListener('click', () => {
-      const isOpen = accountPanel.classList.toggle('open');
-      accountToggle.setAttribute('aria-expanded', String(isOpen));
-    });
-
-    saveAccountButton.addEventListener('click', () => {
-      const nextName = accountNameInput.value.trim();
-      if (!nextName) {
-        setFeedback('Display name cannot be empty.');
-        return;
-      }
-      profile.name = nextName;
-      profile.bio = accountBioInput.value.trim();
-      saveProfile(profile);
-      renderProfile();
-      setFeedback('Profile updated.');
-    });
-
-    function connectGoogle(mode) {
-      profile.connected = true;
-      saveProfile(profile);
-      renderProfile();
-      setFeedback(`${mode} with Google selected. Complete OAuth in backend integration.`);
+      const showFeatured = category === 'all' || featuredPost.dataset.category === category;
+      featuredPost.classList.toggle('hidden', !showFeatured);
     }
 
-    googleLoginButton.addEventListener('click', () => connectGoogle('Login'));
-    googleSignupButton.addEventListener('click', () => connectGoogle('Sign up'));
+    navButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        setActive(navButtons, button);
+        const category = button.dataset.view;
+        applyFilter(category);
+        filterButtons.forEach((filterButton) => {
+          filterButton.classList.toggle('active', filterButton.dataset.filter === category);
+        });
+      });
+    });
 
-    renderProfile();
-    activatePage('engage');
+    filterButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        setActive(filterButtons, button);
+        const category = button.dataset.filter;
+        applyFilter(category);
+        navButtons.forEach((navButton) => {
+          navButton.classList.toggle('active', navButton.dataset.view === category);
+        });
+      });
+    });
+
+    newsletterForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      newsletterMessage.textContent = 'Thanks for subscribing! You will receive our next ICT Club digest.';
+      newsletterForm.reset();
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
